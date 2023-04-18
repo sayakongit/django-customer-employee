@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee form</title>
+    <style>
+         form {
+            font-family: arial, sans-serif;
+            border: 1px solid grey;
+            padding: 1.2rem;
+            width: 50%;
+        }
+
+        .form-control {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+         select, input {
+            padding: 0.7rem 1.4rem;
+            font-size: 1.1rem;
+            width: 70%;
+            margin-bottom: 30px;
+        }
+        button {
+            font-size: 1rem;
+            padding: 0.6rem 0.8rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="/emp/{{company.id}}" method="post">
+        {% csrf_token %}
+        <h2>Company: {{company}}</h2>
+        <div class="form-control">
+            <label for="emp">Select Employee</label>
+            <select name="emp" id="emp">
+                    <option disabled selected>--Select an employee--</option>
+                    {% for emp in employees %}
+                        <option value="{{ emp.id }}">{{ emp.first_name }} {{ emp.last_name }}</option>
+                    {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Add Employee</button>
+    </form>
+</body>
+</html>
